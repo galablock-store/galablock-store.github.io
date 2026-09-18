@@ -1,101 +1,202 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GalaBlock</title>
-    <link rel="stylesheet" href="index.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Catálogo de familias Revit — GalaBlock</title>
+<meta name="description" content="Explora y descarga gratis todas las familias de Revit (.rfa) de GalaBlock. Busca por nombre, filtra por categoría y descarga al instante.">
+<meta name="author" content="GalaBlock">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0b0d11" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://galablock-store.github.io/products.html">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="GalaBlock">
+<meta property="og:locale" content="es_ES">
+<meta property="og:title" content="Catálogo de familias Revit — GalaBlock">
+<meta property="og:description" content="Explora y descarga gratis todas las familias de Revit (.rfa) de GalaBlock. Busca por nombre, filtra por categoría y descarga al instante.">
+<meta property="og:url" content="https://galablock-store.github.io/products.html">
+<meta property="og:image" content="https://galablock-store.github.io/assets/img/og-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Catálogo de familias Revit — GalaBlock">
+<meta name="twitter:description" content="Explora y descarga gratis todas las familias de Revit (.rfa) de GalaBlock. Busca por nombre, filtra por categoría y descarga al instante.">
+<meta name="twitter:image" content="https://galablock-store.github.io/assets/img/og-cover.jpg">
+
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="favicon.svg">
+<link rel="manifest" href="site.webmanifest">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="assets/css/styles.css">
+
+<!-- Aplica el tema guardado antes de pintar, para evitar el destello blanco. -->
+<script>
+(function () {
+  try {
+    var saved = localStorage.getItem('galablock-theme');
+    if (saved === 'light' || saved === 'dark') {
+      document.documentElement.setAttribute('data-theme', saved);
+      return;
+    }
+  } catch (e) {}
+  document.documentElement.removeAttribute('data-theme');
+})();
+// Con JS activo se permite la animación de entrada; sin él, el contenido
+// se muestra directamente en lugar de quedarse invisible.
+document.documentElement.classList.add('js');
+</script>
 </head>
 <body>
-    <header>
-        <h1><a href="index.html">GALABLOCK</a></h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="products.html">Productos</a></li>
-            </ul>
-        </nav>
-    </header>
-    <h1><a class="hidden-text">""</a></h1>
-    <h1><a class="hidden-text">""</a></h1>
-    <div class="container-items" id="products-container">
-        <!-- Productos se generarán aquí dinámicamente -->
+<a class="skip-link" href="#main">Saltar al contenido</a>
+
+<header class="site-header">
+  <div class="wrap site-header__inner">
+    <a class="brand" href="index.html">
+      <svg class="brand__mark" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true">
+        <path d="M32 6 58 20 32 34 6 20z"/><path d="M6 20v24l26 14V34"/><path d="M58 20v24L32 58"/>
+      </svg>
+      GALABLOCK
+    </a>
+
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Abrir menú">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <path d="M4 7h16M4 12h16M4 17h16"/>
+      </svg>
+    </button>
+
+    <nav class="site-nav" id="primary-nav" aria-label="Navegación principal">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="products.html">Catálogo</a></li>
+        <li><a href="index.html#como-funciona">Cómo funciona</a></li>
+      </ul>
+    </nav>
+
+    <button class="theme-toggle" type="button" aria-label="Cambiar tema" title="Cambiar tema">
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
+      </svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M19 5l-1.5 1.5M6.5 17.5 5 19"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+    <nav aria-label="Ruta de navegación">
+      <ol class="breadcrumb">
+        <li><a href="index.html">Inicio</a></li>
+        <li><span aria-current="page">Catálogo</span></li>
+      </ol>
+    </nav>
+  </div>
+
+  <section class="section section--tight">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Biblioteca completa</p>
+          <h2>Catálogo</h2>
+          <p>Todas las familias de Revit disponibles para descargar. Usa el buscador o filtra por categoría.</p>
+        </div>
+      </div>
+
+      <form class="toolbar" role="search" onsubmit="return false">
+        <div class="search" data-filled="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/>
+          </svg>
+          <label class="visually-hidden" for="search-input">Buscar modelos</label>
+          <input id="search-input" type="search" name="q" placeholder="Buscar por nombre, categoría o etiqueta…" autocomplete="off">
+          <button class="search__clear" type="button" aria-label="Borrar búsqueda">&times;</button>
+        </div>
+
+        <div class="field">
+          <label for="sort-select">Ordenar</label>
+          <select id="sort-select" name="sort">
+            <option value="recientes">Más recientes</option>
+            <option value="az">Nombre (A–Z)</option>
+            <option value="za">Nombre (Z–A)</option>
+            <option value="ligeros">Archivo más ligero</option>
+          </select>
+        </div>
+      </form>
+
+      <div class="chips" id="category-chips" role="group" aria-label="Filtrar por categoría"></div>
+
+      <p class="results-count" id="results-count" role="status" aria-live="polite"></p>
+
+      <div class="grid" id="catalog-grid"></div>
+
+      <noscript>
+        <div class="empty-state">
+          <h3>Activa JavaScript para usar el buscador</h3>
+          <p>Mientras tanto, puedes descargar los modelos directamente:</p>
+          <ul style="list-style:none;display:grid;gap:10px;justify-items:center">
+            <li><a href="galablock.store/LR_Ford_GT40_10353%20(2).rfa" download>Mustang GT500 (RFA, 2,4 MB)</a></li>
+            <li><a href="galablock.store/Concrete_Truck_2012.rfa" download>Concrete Truck (RFA, 2,1 MB)</a></li>
+            <li><a href="galablock.store/Cama%20Queen%20Marcel.rfa" download>Cama Queen Marcel (RFA, 1 MB)</a></li>
+          </ul>
+        </div>
+      </noscript>
     </div>
-    <script>
-        // Lista de productos
-        const products = [
-            {
-                title: "Mustang GT500",
-                imgSrc: "Images/Mustanggt500%202.jpg",
-                downloadPath: "galablock.store/LR_Ford_GT40_10353 (2).rfa",
-                description: "El Ford Mustang GT500 es un coche icónico con un motor potente y diseño agresivo."
-            },
-            {
-                title: "Concrete Truck",
-                imgSrc: "Images/concretetruck4.jpg",
-                downloadPath: "galablock.store/Concrete_Truck_2012.rfa",
-                description: "Camión de concreto ideal para grandes obras y construcciones duraderas."
-            },
-            {
-                title: "Cama Queen Marcel",
-                imgSrc: "Images/imagen_2024-07-25_185255711.png",
-                downloadPath: "galablock.store/Cama Queen Marcel.rfa",
-                description: "Cama Queen Size con diseño moderno y confort inigualable."
-            },
-            // Agrega más productos aquí
-        ];
+  </section>
 
-        // Función para crear un elemento de producto
-        function createProductElement(product) {
-            const itemDiv = document.createElement("div");
-            itemDiv.className = "item";
+  <!-- Espacio publicitario (se mantiene el banner existente) -->
+  <div class="wrap">
+    <aside class="ad-slot" aria-label="Publicidad">
+      <script>
+        atOptions = {
+          key: '94309094bdf5b0afbe1424dee0899a27',
+          format: 'iframe',
+          height: 90,
+          width: 728,
+          params: {}
+        };
+      </script>
+      <script src="https://www.topcreativeformat.com/94309094bdf5b0afbe1424dee0899a27/invoke.js"></script>
+    </aside>
+  </div>
 
-            const figure = document.createElement("figure");
+</main>
 
-            const link = document.createElement("a");
-            link.href = `product.html?img=${product.imgSrc}&title=${encodeURIComponent(product.title)}&download=${product.downloadPath}&description=${encodeURIComponent(product.description)}`;
-            
-            const img = document.createElement("img");
-            img.src = product.imgSrc;
-            img.alt = product.title;
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="site-footer__grid">
+      <div>
+        <h2>GalaBlock</h2>
+        <p>Biblioteca gratuita de familias de Revit para arquitectos, ingenieros y estudiantes que trabajan en BIM.</p>
+      </div>
+      <div>
+        <h3>Navegación</h3>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="products.html">Catálogo</a></li>
+          <li><a href="index.html#como-funciona">Cómo funciona</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Categorías</h3>
+        <ul>
+          <li><a href="products.html?cat=vehiculos">Vehículos</a></li>
+          <li><a href="products.html?cat=mobiliario">Mobiliario</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="site-footer__bottom">
+      <p>&copy; <span data-role="year">2024</span> GalaBlock. Todos los modelos se ofrecen tal cual, sin garantía.</p>
+      <p>Hecho para la comunidad BIM</p>
+    </div>
+  </div>
+</footer>
 
-            link.appendChild(img);
-            figure.appendChild(link);
-            itemDiv.appendChild(figure);
-
-            const infoProductDiv = document.createElement("div");
-            infoProductDiv.className = "info-product";
-
-            const h2 = document.createElement("h2");
-            h2.textContent = product.title;
-
-            const p = document.createElement("p");
-            p.className = "price hidden-price";
-
-            const downloadLink = document.createElement("a");
-            downloadLink.href = product.downloadPath;
-            downloadLink.download = product.downloadPath;
-            
-            const button = document.createElement("button");
-            button.textContent = "Descargar";
-
-            downloadLink.appendChild(button);
-            infoProductDiv.appendChild(h2);
-            infoProductDiv.appendChild(p);
-            infoProductDiv.appendChild(downloadLink);
-            itemDiv.appendChild(infoProductDiv);
-
-            return itemDiv;
-        }
-
-        // Agregar los productos al contenedor
-        const productsContainer = document.getElementById("products-container");
-        products.forEach(product => {
-            const productElement = createProductElement(product);
-            productsContainer.appendChild(productElement);
-        });
-    </script>
+<script src="assets/js/products.js"></script>
+<script src="assets/js/app.js"></script>
 </body>
 </html>

@@ -1,111 +1,305 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GalaBlock</title>
-    <link rel="stylesheet" href="index.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GalaBlock — Familias de Revit gratis para descargar</title>
+<meta name="description" content="Biblioteca gratuita de familias de Revit (.rfa) listas para cargar en tus proyectos BIM: vehículos, mobiliario y más. Descarga directa, sin registro.">
+<meta name="author" content="GalaBlock">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0b0d11" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://galablock-store.github.io/">
+
+<!-- Redes sociales -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="GalaBlock">
+<meta property="og:locale" content="es_ES">
+<meta property="og:title" content="GalaBlock — Familias de Revit gratis para descargar">
+<meta property="og:description" content="Biblioteca gratuita de familias de Revit (.rfa) listas para cargar en tus proyectos BIM. Descarga directa, sin registro.">
+<meta property="og:url" content="https://galablock-store.github.io/">
+<meta property="og:image" content="https://galablock-store.github.io/assets/img/og-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="GalaBlock — Familias de Revit gratis para descargar">
+<meta name="twitter:description" content="Biblioteca gratuita de familias de Revit (.rfa) listas para cargar en tus proyectos BIM.">
+<meta name="twitter:image" content="https://galablock-store.github.io/assets/img/og-cover.jpg">
+
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="favicon.svg">
+<link rel="manifest" href="site.webmanifest">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="assets/css/styles.css">
+<link rel="preload" as="image" href="assets/img/mustang-gt500-full.webp" type="image/webp">
+
+<!-- Aplica el tema guardado antes de pintar, para evitar el destello blanco. -->
+<script>
+(function () {
+  try {
+    var saved = localStorage.getItem('galablock-theme');
+    if (saved === 'light' || saved === 'dark') {
+      document.documentElement.setAttribute('data-theme', saved);
+      return;
+    }
+  } catch (e) {}
+  document.documentElement.removeAttribute('data-theme');
+})();
+// Con JS activo se permite la animación de entrada; sin él, el contenido
+// se muestra directamente en lugar de quedarse invisible.
+document.documentElement.classList.add('js');
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "GalaBlock",
+  "url": "https://galablock-store.github.io/",
+  "description": "Biblioteca gratuita de familias de Revit (.rfa) para proyectos BIM.",
+  "inLanguage": "es",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://galablock-store.github.io/products.html?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
 </head>
 <body>
-    <header>
-        <h1><a href="index.html">GALABLOCK</a></h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="products.html">Productos</a></li>
-            </ul>
-        </nav>
-    </header>
-    <h1><a class="hidden-text">hola</a></h1>
-    <h1><a class="hidden-text">""</a></h1>
-<script type="text/javascript">
-	atOptions = {
-		'key' : '94309094bdf5b0afbe1424dee0899a27',
-		'format' : 'iframe',
-		'height' : 90,
-		'width' : 728,
-		'params' : {}
-	};
-</script>
-<script type="text/javascript" src="//www.topcreativeformat.com/94309094bdf5b0afbe1424dee0899a27/invoke.js"></script>
-    <div class="container-items" id="products-container">
-        <!-- Productos se generarán aquí dinámicamente -->
+<a class="skip-link" href="#main">Saltar al contenido</a>
+
+<header class="site-header">
+  <div class="wrap site-header__inner">
+    <a class="brand" href="index.html">
+      <svg class="brand__mark" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true">
+        <path d="M32 6 58 20 32 34 6 20z"/><path d="M6 20v24l26 14V34"/><path d="M58 20v24L32 58"/>
+      </svg>
+      GALABLOCK
+    </a>
+
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Abrir menú">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <path d="M4 7h16M4 12h16M4 17h16"/>
+      </svg>
+    </button>
+
+    <nav class="site-nav" id="primary-nav" aria-label="Navegación principal">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="products.html">Catálogo</a></li>
+        <li><a href="index.html#como-funciona">Cómo funciona</a></li>
+      </ul>
+    </nav>
+
+    <button class="theme-toggle" type="button" aria-label="Cambiar tema" title="Cambiar tema">
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
+      </svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M19 5l-1.5 1.5M6.5 17.5 5 19"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ===================== Hero ===================== -->
+  <section class="hero">
+    <div class="wrap hero__inner">
+      <div>
+        <p class="eyebrow">Biblioteca BIM · Archivos .rfa</p>
+        <h1>Familias de Revit <em>listas para usar</em></h1>
+        <p class="hero__lead">
+          Modelos descargables que puedes cargar directamente en tu proyecto.
+          Sin registro, sin marcas de agua y sin pasos intermedios: eliges el
+          modelo, descargas el archivo y sigues trabajando.
+        </p>
+        <div class="hero__actions">
+          <a class="btn btn--primary btn--lg" href="products.html">Explorar el catálogo</a>
+          <a class="btn btn--ghost btn--lg" href="#como-funciona">Cómo funciona</a>
+        </div>
+        <ul class="hero__stats">
+          <li>
+            <span class="stat__value" data-stat="count">—</span>
+            <span class="stat__label">Modelos</span>
+          </li>
+          <li>
+            <span class="stat__value">RFA</span>
+            <span class="stat__label">Formato nativo</span>
+          </li>
+          <li>
+            <span class="stat__value">$0</span>
+            <span class="stat__label">Siempre gratis</span>
+          </li>
+        </ul>
+      </div>
+
+      <figure class="hero__art">
+        <picture>
+          <source type="image/webp" srcset="assets/img/mustang-gt500-full.webp">
+          <img src="assets/img/mustang-gt500-full.jpg"
+               alt="Render de una familia de Revit de un coche deportivo Mustang GT500"
+               width="1600" height="771" fetchpriority="high" decoding="async">
+        </picture>
+        <figcaption>Mustang GT500 · Vehículos</figcaption>
+      </figure>
     </div>
-    <script>
-        // Lista de productos
-        const products = [
-            {
-                title: "Mustang GT500",
-                imgSrc: "Images/Mustanggt500%202.jpg",
-                downloadPath: "galablock.store/LR_Ford_GT40_10353 (2).rfa",
-                description: "El Ford Mustang GT500 es un coche icónico con un motor potente y diseño agresivo."
-            },
-            {
-                title: "Concrete Truck",
-                imgSrc: "Images/concretetruck4.jpg",
-                downloadPath: "galablock.store/Concrete_Truck_2012.rfa",
-                description: "Camión de concreto ideal para grandes obras y construcciones duraderas."
-            },
-            {
-                title: "Cama Queen Marcel",
-                imgSrc: "Images/imagen_2024-07-25_185255711.png",
-                downloadPath: "galablock.store/Cama Queen Marcel.rfa",
-                description: "Cama Queen Size con diseño moderno y confort inigualable."
-            },
-            // Agrega más productos aquí
-        ];
+  </section>
 
-        // Función para crear un elemento de producto
-        function createProductElement(product) {
-            const itemDiv = document.createElement("div");
-            itemDiv.className = "item";
+  <!-- Espacio publicitario (se mantiene el banner existente) -->
+  <div class="wrap">
+    <aside class="ad-slot" aria-label="Publicidad">
+      <script>
+        atOptions = {
+          key: '94309094bdf5b0afbe1424dee0899a27',
+          format: 'iframe',
+          height: 90,
+          width: 728,
+          params: {}
+        };
+      </script>
+      <script src="https://www.topcreativeformat.com/94309094bdf5b0afbe1424dee0899a27/invoke.js"></script>
+    </aside>
+  </div>
 
-            const figure = document.createElement("figure");
+  <!-- ===================== Destacados ===================== -->
+  <section class="section section--tight">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <h2>Últimos modelos</h2>
+          <p>Lo más reciente que hemos subido a la biblioteca.</p>
+        </div>
+        <a class="btn btn--ghost" href="products.html">Ver todo el catálogo</a>
+      </div>
 
-            const link = document.createElement("a");
-            link.href = `product.html?img=${product.imgSrc}&title=${encodeURIComponent(product.title)}&download=${product.downloadPath}&description=${encodeURIComponent(product.description)}`;
-            
-            const img = document.createElement("img");
-            img.src = product.imgSrc;
-            img.alt = product.title;
+      <div class="grid" id="featured-grid" data-limit="3"></div>
 
-            link.appendChild(img);
-            figure.appendChild(link);
-            itemDiv.appendChild(figure);
+      <noscript>
+        <div class="empty-state">
+          <h3>Activa JavaScript para ver el catálogo</h3>
+          <p>Mientras tanto, puedes descargar los modelos directamente:</p>
+          <ul style="list-style:none;display:grid;gap:10px;justify-items:center">
+            <li><a href="galablock.store/LR_Ford_GT40_10353%20(2).rfa" download>Mustang GT500 (RFA, 2,4 MB)</a></li>
+            <li><a href="galablock.store/Concrete_Truck_2012.rfa" download>Concrete Truck (RFA, 2,1 MB)</a></li>
+            <li><a href="galablock.store/Cama%20Queen%20Marcel.rfa" download>Cama Queen Marcel (RFA, 1 MB)</a></li>
+          </ul>
+        </div>
+      </noscript>
+    </div>
+  </section>
 
-            const infoProductDiv = document.createElement("div");
-            infoProductDiv.className = "info-product";
+  <!-- ===================== Ventajas ===================== -->
+  <section class="section section--tight">
+    <div class="wrap">
+      <ul class="features reveal">
+        <li class="feature">
+          <span class="feature__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+          </span>
+          <h3>Descarga directa</h3>
+          <p>Un clic y el archivo <code>.rfa</code> está en tu equipo. Sin cuentas, sin correos de confirmación ni esperas.</p>
+        </li>
+        <li class="feature">
+          <span class="feature__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 2 7l10 5 10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </span>
+          <h3>Formato nativo</h3>
+          <p>Familias de Revit reales, no mallas importadas. Se cargan como cualquier otra familia del proyecto.</p>
+        </li>
+        <li class="feature">
+          <span class="feature__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3 14h8l-1 8 10-12h-8z"/></svg>
+          </span>
+          <h3>Geometría ligera</h3>
+          <p>Modelos optimizados para que puedas colocar varias instancias sin castigar el rendimiento del archivo.</p>
+        </li>
+        <li class="feature">
+          <span class="feature__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+          </span>
+          <h3>Uso libre</h3>
+          <p>Puedes usar los modelos en proyectos personales y profesionales. Sin cuotas ni licencias por puesto.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
 
-            const h2 = document.createElement("h2");
-            h2.textContent = product.title;
+  <!-- ===================== Cómo funciona ===================== -->
+  <section class="section section--tight" id="como-funciona">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <p class="eyebrow">En tres pasos</p>
+          <h2>Cómo funciona</h2>
+          <p>De la biblioteca a tu proyecto de Revit en menos de un minuto.</p>
+        </div>
+      </div>
+      <ol class="steps reveal">
+        <li class="step">
+          <h3>Elige el modelo</h3>
+          <p>Busca por nombre o filtra por categoría en el catálogo hasta encontrar la familia que necesitas.</p>
+        </li>
+        <li class="step">
+          <h3>Descarga el archivo</h3>
+          <p>Cada ficha indica formato, tamaño y versión mínima de Revit antes de descargar. El archivo baja directo.</p>
+        </li>
+        <li class="step">
+          <h3>Cárgalo en Revit</h3>
+          <p>Abre tu proyecto y usa <strong>Insertar › Cargar familia</strong>. Selecciona el <code>.rfa</code> y colócalo en la vista.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
 
-            const p = document.createElement("p");
-            p.className = "price hidden-price";
+  <!-- ===================== CTA ===================== -->
+  <section class="section section--tight">
+    <div class="wrap">
+      <div class="cta reveal">
+        <h2>Empieza a descargar</h2>
+        <p>Todo el catálogo es gratuito y está disponible ahora mismo. Elige un modelo y llévatelo a tu proyecto.</p>
+        <a class="btn btn--primary btn--lg" href="products.html">Ir al catálogo</a>
+      </div>
+    </div>
+  </section>
 
-            const downloadLink = document.createElement("a");
-            downloadLink.href = product.downloadPath;
-            downloadLink.download = product.downloadPath;
-            
-            const button = document.createElement("button");
-            button.textContent = "Descargar";
+</main>
 
-            downloadLink.appendChild(button);
-            infoProductDiv.appendChild(h2);
-            infoProductDiv.appendChild(p);
-            infoProductDiv.appendChild(downloadLink);
-            itemDiv.appendChild(infoProductDiv);
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="site-footer__grid">
+      <div>
+        <h2>GalaBlock</h2>
+        <p>Biblioteca gratuita de familias de Revit para arquitectos, ingenieros y estudiantes que trabajan en BIM.</p>
+      </div>
+      <div>
+        <h3>Navegación</h3>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="products.html">Catálogo</a></li>
+          <li><a href="index.html#como-funciona">Cómo funciona</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Categorías</h3>
+        <ul>
+          <li><a href="products.html?cat=vehiculos">Vehículos</a></li>
+          <li><a href="products.html?cat=mobiliario">Mobiliario</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="site-footer__bottom">
+      <p>&copy; <span data-role="year">2024</span> GalaBlock. Todos los modelos se ofrecen tal cual, sin garantía.</p>
+      <p>Hecho para la comunidad BIM</p>
+    </div>
+  </div>
+</footer>
 
-            return itemDiv;
-        }
-
-        // Agregar los productos al contenedor
-        const productsContainer = document.getElementById("products-container");
-        products.forEach(product => {
-            const productElement = createProductElement(product);
-            productsContainer.appendChild(productElement);
-        });
-    </script>
+<script src="assets/js/products.js"></script>
+<script src="assets/js/app.js"></script>
 </body>
 </html>
