@@ -44,7 +44,7 @@ const PRODUCTS = [
     bytes: 2555904,
     format: 'RFA',
     software: 'Revit 2018 o superior',
-    tags: ['coche', 'auto', 'deportivo', 'ford', 'exterior', 'mobiliario urbano'],
+    tags: ['coche', 'auto', 'deportivo', 'ford', 'exterior', 'escena urbana'],
     added: '2024-07-25'
   },
   {
@@ -68,10 +68,10 @@ const PRODUCTS = [
     id: 'cama-queen-marcel',
     title: 'Cama Queen Marcel',
     category: 'mobiliario',
-    description: 'Cama Queen Size de líneas limpias y cabecero tapizado, lista para dormitorios residenciales y hoteleros.',
+    description: 'Cama Queen Size de líneas limpias con cabecero de madera, lista para dormitorios residenciales y hoteleros.',
     details: 'Familia de mobiliario para dormitorio con medidas Queen Size. Pensada para amueblar rápidamente dormitorios en proyectos residenciales, apartamentos turísticos u hotelería, manteniendo un aspecto contemporáneo en vistas de interior.',
     image: 'cama-queen-marcel',
-    imageAlt: 'Render de una cama Queen Size con cabecero tapizado y ropa de cama clara',
+    imageAlt: 'Render de una cama Queen Size con cabecero de panel de madera y colchón y almohadas claros',
     width: 768,
     height: 577,
     download: 'galablock.store/Cama Queen Marcel.rfa',

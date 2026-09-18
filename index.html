@@ -29,6 +29,7 @@
 <link rel="apple-touch-icon" href="favicon.svg">
 <link rel="manifest" href="site.webmanifest">
 
+<link rel="preconnect" href="https://www.topcreativeformat.com">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Inter:wght@400;500;600&display=swap">
@@ -150,21 +151,6 @@ document.documentElement.classList.add('js');
     </div>
   </section>
 
-  <!-- Espacio publicitario (se mantiene el banner existente) -->
-  <div class="wrap">
-    <aside class="ad-slot" aria-label="Publicidad">
-      <script>
-        atOptions = {
-          key: '94309094bdf5b0afbe1424dee0899a27',
-          format: 'iframe',
-          height: 90,
-          width: 728,
-          params: {}
-        };
-      </script>
-      <script src="https://www.topcreativeformat.com/94309094bdf5b0afbe1424dee0899a27/invoke.js"></script>
-    </aside>
-  </div>
 
   <!-- ===================== Destacados ===================== -->
   <section class="section section--tight">
@@ -267,6 +253,26 @@ document.documentElement.classList.add('js');
     </div>
   </section>
 
+  <!-- Los scripts de contenido van ANTES del banner de terceros: así un
+       host lento o bloqueado no puede retrasar el pintado del catálogo.
+       El anuncio conserva su posición visual con `order` en styles.css. -->
+  <script src="assets/js/products.js"></script>
+  <script src="assets/js/app.js"></script>
+
+  <div class="wrap ad-host ad-host--top">
+    <aside class="ad-slot" aria-label="Publicidad">
+      <script>
+        atOptions = {
+          key: '94309094bdf5b0afbe1424dee0899a27',
+          format: 'iframe',
+          height: 90,
+          width: 728,
+          params: {}
+        };
+      </script>
+      <script src="https://www.topcreativeformat.com/94309094bdf5b0afbe1424dee0899a27/invoke.js"></script>
+    </aside>
+  </div>
 </main>
 
 <footer class="site-footer">
@@ -299,7 +305,5 @@ document.documentElement.classList.add('js');
   </div>
 </footer>
 
-<script src="assets/js/products.js"></script>
-<script src="assets/js/app.js"></script>
 </body>
 </html>

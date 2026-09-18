@@ -28,6 +28,7 @@
 <link rel="apple-touch-icon" href="favicon.svg">
 <link rel="manifest" href="site.webmanifest">
 
+<link rel="preconnect" href="https://www.topcreativeformat.com">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Inter:wght@400;500;600&display=swap">
@@ -96,13 +97,28 @@ document.documentElement.classList.add('js');
       </ol>
     </nav>
 
-    <!-- Rellenado por app.js a partir de ?id=<slug> -->
-    <div class="detail" id="product-detail" hidden></div>
+    <!-- Rellenado por app.js a partir de ?id=<slug>. Sin `hidden`: el hueco se
+         reserva con min-height mientras está vacío para no desplazar el
+         contenido de abajo cuando llega el JS. -->
+    <div class="detail" id="product-detail"></div>
+
+    <noscript>
+      <div class="empty-state">
+        <h2>Activa JavaScript para ver la ficha</h2>
+        <p>Mientras tanto, puedes descargar los modelos directamente:</p>
+        <ul style="list-style:none;display:grid;gap:10px;justify-items:center">
+          <li><a href="galablock.store/LR_Ford_GT40_10353%20(2).rfa" download>Mustang GT500 (RFA, 2,4 MB)</a></li>
+          <li><a href="galablock.store/Concrete_Truck_2012.rfa" download>Concrete Truck (RFA, 2,1 MB)</a></li>
+          <li><a href="galablock.store/Cama%20Queen%20Marcel.rfa" download>Cama Queen Marcel (RFA, 1 MB)</a></li>
+        </ul>
+      </div>
+    </noscript>
 
     <div class="error-page" id="product-not-found" hidden>
       <div>
         <p class="error-page__code">404</p>
-        <h1>No encontramos ese modelo</h1>
+        <!-- h2, no h1: el h1 de esta página es el nombre del modelo. -->
+        <h2>No encontramos ese modelo</h2>
         <p>El enlace puede estar incompleto o el modelo ya no está disponible. Prueba a buscarlo en el catálogo.</p>
         <div class="error-page__actions">
           <a class="btn btn--primary btn--lg" href="products.html">Ver el catálogo</a>
@@ -112,21 +128,6 @@ document.documentElement.classList.add('js');
     </div>
   </div>
 
-  <!-- Espacio publicitario (se mantiene el banner existente) -->
-  <div class="wrap">
-    <aside class="ad-slot" aria-label="Publicidad">
-      <script>
-        atOptions = {
-          key: '94309094bdf5b0afbe1424dee0899a27',
-          format: 'iframe',
-          height: 90,
-          width: 728,
-          params: {}
-        };
-      </script>
-      <script src="https://www.topcreativeformat.com/94309094bdf5b0afbe1424dee0899a27/invoke.js"></script>
-    </aside>
-  </div>
 
 
   <section class="section section--tight" id="related-section">
@@ -141,6 +142,26 @@ document.documentElement.classList.add('js');
       <div class="grid" id="related-grid"></div>
     </div>
   </section>
+  <!-- Los scripts de contenido van ANTES del banner de terceros: así un
+       host lento o bloqueado no puede retrasar el pintado del catálogo.
+       El anuncio conserva su posición visual con `order` en styles.css. -->
+  <script src="assets/js/products.js"></script>
+  <script src="assets/js/app.js"></script>
+
+  <div class="wrap ad-host">
+    <aside class="ad-slot" aria-label="Publicidad">
+      <script>
+        atOptions = {
+          key: '94309094bdf5b0afbe1424dee0899a27',
+          format: 'iframe',
+          height: 90,
+          width: 728,
+          params: {}
+        };
+      </script>
+      <script src="https://www.topcreativeformat.com/94309094bdf5b0afbe1424dee0899a27/invoke.js"></script>
+    </aside>
+  </div>
 </main>
 
 <footer class="site-footer">
@@ -173,7 +194,5 @@ document.documentElement.classList.add('js');
   </div>
 </footer>
 
-<script src="assets/js/products.js"></script>
-<script src="assets/js/app.js"></script>
 </body>
 </html>

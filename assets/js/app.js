@@ -70,23 +70,34 @@
       return Theme.systemPrefersDark() ? 'dark' : 'light';
     },
 
-    apply(mode) {
+    // persist=true SÓLO cuando la elección es del usuario. Si guardásemos en
+    // el arranque, la primera visita congelaría el tema y el sitio dejaría de
+    // seguir a prefers-color-scheme cuando el sistema cambie a oscuro.
+    apply(mode, persist) {
       document.documentElement.setAttribute('data-theme', mode);
-      try { localStorage.setItem(Theme.KEY, mode); } catch (_) { /* modo privado */ }
-      const btn = document.querySelector('.theme-toggle');
-      if (btn) {
-        const next = mode === 'dark' ? 'claro' : 'oscuro';
-        btn.setAttribute('aria-label', 'Cambiar a tema ' + next);
-        btn.setAttribute('title', 'Cambiar a tema ' + next);
+      if (persist) {
+        try { localStorage.setItem(Theme.KEY, mode); } catch (_) { /* modo privado */ }
       }
+      Theme.syncLabel(document.querySelector('.theme-toggle'), mode);
+    },
+
+    syncLabel(btn, mode) {
+      if (!btn) return;
+      const next = mode === 'dark' ? 'claro' : 'oscuro';
+      btn.setAttribute('aria-label', 'Cambiar a tema ' + next);
+      btn.setAttribute('title', 'Cambiar a tema ' + next);
     },
 
     init() {
       const btn = document.querySelector('.theme-toggle');
-      Theme.apply(Theme.current());
+      // Sólo fijamos el atributo si el usuario ya eligió antes; si no, dejamos
+      // que manden las media queries y sólo sincronizamos la etiqueta del botón.
+      const saved = Theme.stored();
+      if (saved === 'light' || saved === 'dark') Theme.apply(saved, false);
+      Theme.syncLabel(btn, Theme.current());
       if (!btn) return;
       btn.addEventListener('click', () => {
-        Theme.apply(Theme.current() === 'dark' ? 'light' : 'dark');
+        Theme.apply(Theme.current() === 'dark' ? 'light' : 'dark', true);
       });
     }
   };
@@ -104,7 +115,23 @@
     }
 
     toggle.addEventListener('click', () => {
-      setOpen(nav.getAttribute('data-open') !== 'true');
+      const open = nav.getAttribute('data-open') !== 'true';
+      setOpen(open);
+      // El panel es opaco y se superpone al contenido: si no movemos el foco,
+      // el siguiente Tab cae en controles tapados por el propio menú.
+      if (open) {
+        const first = nav.querySelector('a');
+        if (first) first.focus();
+      }
+    });
+
+    // Cerrar cuando el foco o el puntero salen de la cabecera.
+    const header = toggle.closest('.site-header') || document.body;
+    document.addEventListener('focusin', e => {
+      if (nav.getAttribute('data-open') === 'true' && !header.contains(e.target)) setOpen(false);
+    });
+    document.addEventListener('pointerdown', e => {
+      if (nav.getAttribute('data-open') === 'true' && !header.contains(e.target)) setOpen(false);
     });
 
     nav.addEventListener('click', e => {
@@ -156,7 +183,8 @@
     media.innerHTML =
       '<picture>' +
         '<source type="image/webp" srcset="' + img + '-card.webp">' +
-        '<img src="' + img + '-card.jpg" alt="" loading="lazy" decoding="async">' +
+        '<img src="' + img + '-card.jpg" alt=""' +
+             ' width="760" height="570" loading="lazy" decoding="async">' +
       '</picture>';
 
     const badge = document.createElement('span');
@@ -223,7 +251,11 @@
     if (!host) return;
 
     const limit = parseInt(host.dataset.limit || '3', 10);
-    const items = (window.PRODUCTS || []).slice(0, limit);
+    // La sección se llama "Últimos modelos": hay que ordenar por fecha, no
+    // confiar en el orden en que estén escritos en el array.
+    const items = (window.PRODUCTS || []).slice()
+      .sort((a, b) => String(b.added).localeCompare(String(a.added)))
+      .slice(0, limit);
     const frag = document.createDocumentFragment();
     items.forEach(p => frag.appendChild(createCard(p)));
     host.appendChild(frag);
@@ -361,6 +393,14 @@
             c.setAttribute('aria-pressed', String(c.dataset.category === 'todos'));
           });
           render();
+          // render() vacía la rejilla y destruye este mismo botón: sin esto el
+          // foco se perdería y el tabulador volvería al principio del documento.
+          if (input) {
+            input.focus();
+          } else if (countEl) {
+            countEl.setAttribute('tabindex', '-1');
+            countEl.focus();
+          }
         });
         empty.append(h3, p, reset);
         grid.appendChild(empty);
@@ -406,13 +446,15 @@
     // de la URL, para no abrir la puerta a inyecciones.
     const legacyTitle = params.get('title');
     if (legacyTitle) {
-      const needle = normalize(decodeURIComponent(legacyTitle));
+      // URLSearchParams.get ya descodifica: volver a hacerlo lanzaría URIError
+      // con un '%' literal (?title=100%) y dejaría la página en blanco.
+      const needle = normalize(legacyTitle);
       const hit = all.find(p => normalize(p.title) === needle);
       if (hit) return hit;
     }
     const legacyDownload = params.get('download');
     if (legacyDownload) {
-      const needle = decodeURIComponent(legacyDownload);
+      const needle = legacyDownload;
       const hit = all.find(p => p.download === needle);
       if (hit) return hit;
     }
@@ -424,13 +466,24 @@
     if (!root) return;
 
     const notFound = document.getElementById('product-not-found');
-    const product = findProduct(new URLSearchParams(location.search));
+    let product = null;
+    try {
+      product = findProduct(new URLSearchParams(location.search));
+    } catch (_) {
+      product = null; // un parámetro malformado cae en "no encontrado"
+    }
 
     if (!product) {
       root.hidden = true;
       if (notFound) notFound.hidden = false;
       document.title = 'Modelo no encontrado — GalaBlock';
       setMeta('robots', 'noindex, follow');
+      // Sin esto quedaba el titular "Otros modelos" sobre una rejilla vacía.
+      const relEmpty = document.getElementById('related-section');
+      if (relEmpty) relEmpty.hidden = true;
+      const crumbEmpty = document.querySelector('[data-role="breadcrumb-current"]');
+      if (crumbEmpty) crumbEmpty.textContent = 'No encontrado';
+      revealAll();
       return;
     }
 
@@ -606,6 +659,13 @@
     });
   }
 
+  // En index/products/product este script va DENTRO de <main> (para no
+  // depender del banner de terceros), así que el <footer> todavía no existe
+  // cuando arrancamos. Reintentamos al acabar el parseo; es idempotente.
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initYear);
+  }
+
   /* --- Arranque -------------------------------------------------------- */
 
   function boot() {
@@ -619,10 +679,31 @@
     revealAll();
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', boot);
+  let started = false;
+  function start() {
+    if (started) return;
+    started = true;
+    try {
+      boot();
+    } catch (err) {
+      // Nunca dejar la página a medio pintar por un fallo nuestro.
+      console.error('GalaBlock:', err);
+      document.querySelectorAll('.reveal').forEach(el => el.classList.add('is-visible'));
+      const nf = document.getElementById('product-not-found');
+      const pd = document.getElementById('product-detail');
+      if (nf && pd && pd.hidden) nf.hidden = false;
+    }
+  }
+
+  // Este script se carga DESPUÉS del contenido en las 4 páginas, así que el
+  // DOM que necesitamos ya existe y no esperamos a DOMContentLoaded: un
+  // <script> de terceros situado más abajo lo retrasaría y el catálogo
+  // tardaría en aparecer. Si algún día se moviera a <head>, document.body
+  // sería null y caeríamos al comportamiento clásico.
+  if (document.body) {
+    start();
   } else {
-    boot();
+    document.addEventListener('DOMContentLoaded', start);
   }
 
   // Expuesto para depuración / reutilización.

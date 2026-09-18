@@ -16,7 +16,7 @@
   /* Text */
   --text:          #14171c;
   --text-muted:    #5b626e;
-  --text-faint:    #868d99;
+  --text-faint:    #656c78;  /* 5.0:1 sobre blanco; el anterior #868d99 daba 3.34:1 */
   --text-inverse:  #ffffff;
 
   /* Brand */
@@ -172,7 +172,18 @@ h1, h2, h3, h4 {
   padding-inline: var(--gutter);
 }
 
-main { flex: 1 0 auto; }
+/* `main` es flex en columna para poder recolocar el bloque de anuncio, que
+   va ÚLTIMO en el DOM (después de los scripts) para que un tercero lento no
+   retrase el pintado del contenido. `order` le devuelve su sitio visual. */
+main {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+main > * { min-width: 0; }
+.hero { order: -2; }            /* portada: el anuncio va justo tras el hero */
+.ad-host--top { order: -1; }
+#related-section { order: 1; }  /* ficha: el anuncio va antes de los relacionados */
 
 .section { padding-block: clamp(48px, 7vw, 88px); }
 .section--tight { padding-block: clamp(32px, 4vw, 52px); }
@@ -185,6 +196,7 @@ main { flex: 1 0 auto; }
   flex-wrap: wrap;
   margin-bottom: 28px;
 }
+.section-head h1,
 .section-head h2 {
   font-size: clamp(1.5rem, 3.4vw, 2.1rem);
   text-transform: uppercase;
@@ -222,6 +234,7 @@ main { flex: 1 0 auto; }
   position: sticky;
   top: 0;
   z-index: 1000;
+  background: var(--brand); /* alternativa para navegadores sin color-mix() */
   background: color-mix(in srgb, var(--brand) 92%, transparent);
   backdrop-filter: saturate(180%) blur(12px);
   -webkit-backdrop-filter: saturate(180%) blur(12px);
@@ -362,6 +375,7 @@ main { flex: 1 0 auto; }
 }
 :root[data-theme="dark"] .btn--dark,
 .btn--dark { }
+.btn--dark:hover { background: #22262f; }
 .btn--dark:hover { background: color-mix(in srgb, var(--brand) 82%, var(--accent)); }
 
 .btn--ghost {
@@ -642,6 +656,13 @@ main { flex: 1 0 auto; }
   transition: border-color .18s var(--ease), box-shadow .18s var(--ease);
 }
 .search input::placeholder { color: var(--text-faint); }
+/* Ocultamos el aspa nativa: ya pintamos .search__clear y saldrían dos. */
+.search input::-webkit-search-cancel-button,
+.search input::-webkit-search-decoration {
+  -webkit-appearance: none;
+  appearance: none;
+  display: none;
+}
 .search input:focus {
   outline: none;
   border-color: var(--accent);
@@ -678,7 +699,7 @@ main { flex: 1 0 auto; }
 }
 .field select {
   padding: 10px 32px 10px 12px;
-  background: var(--bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23868d99' stroke-width='2.2' stroke-linecap='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 9px center / 15px;
+  background: var(--bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23656c78' stroke-width='2.2' stroke-linecap='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 9px center / 15px;
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   font-size: .9rem;
@@ -798,6 +819,7 @@ main { flex: 1 0 auto; }
   margin-bottom: 12px;
 }
 .cta p {
+  color: rgba(255, 255, 255, .76); /* alternativa sin color-mix() */
   color: color-mix(in srgb, var(--brand-contrast) 74%, transparent);
   max-width: 54ch;
   margin: 0 auto 24px;
@@ -829,6 +851,11 @@ main { flex: 1 0 auto; }
 @media (max-width: 860px) {
   .detail { grid-template-columns: 1fr; }
 }
+
+/* Reserva el alto de la ficha antes de que el JS la rellene, para que el
+   anuncio y "Otros modelos" no salten hacia abajo (CLS). Sólo con JS activo:
+   sin él no queremos un hueco fantasma. */
+:root.js #product-detail:empty { min-height: clamp(520px, 58vw, 680px); }
 
 .detail__figure {
   margin: 0;
@@ -900,6 +927,7 @@ a.tag:hover { border-color: var(--accent); color: var(--accent-text); }
   margin-top: 16px;
   border-radius: var(--radius-sm);
   background: var(--accent-soft);
+  border: 1px solid var(--border);
   border: 1px solid color-mix(in srgb, var(--accent) 28%, transparent);
   font-size: .84rem;
   color: var(--text-muted);
@@ -922,15 +950,30 @@ a.tag:hover { border-color: var(--accent); color: var(--accent-text); }
 .site-footer {
   margin-top: auto;
   background: var(--brand);
+  color: rgba(255, 255, 255, .78); /* alternativa sin color-mix() */
   color: color-mix(in srgb, var(--brand-contrast) 76%, transparent);
   padding-block: clamp(36px, 5vw, 52px) 24px;
   border-top: 1px solid var(--border);
 }
 .site-footer__grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.4fr) repeat(auto-fit, minmax(150px, 1fr));
+  /* Rejilla explícita a propósito: con `repeat(auto-fit, minmax(150px,1fr))`
+     detrás de una pista `minmax(0, …)`, el recuento de repeticiones cuenta esa
+     primera pista como 0px y creaba una 2ª columna antes de que cupiese, lo que
+     dejaba el bloque de marca entre 0 y 17px (visible a 396-470px). */
+  grid-template-columns: 1fr;
   gap: 32px;
   padding-bottom: 28px;
+}
+@media (min-width: 560px) {
+  .site-footer__grid { grid-template-columns: repeat(2, minmax(150px, 1fr)); }
+  .site-footer__grid > :first-child { grid-column: 1 / -1; }
+}
+@media (min-width: 860px) {
+  .site-footer__grid {
+    grid-template-columns: minmax(240px, 1.4fr) repeat(2, minmax(150px, 1fr));
+  }
+  .site-footer__grid > :first-child { grid-column: auto; }
 }
 .site-footer h2 {
   font-size: 1.1rem;
@@ -945,12 +988,14 @@ a.tag:hover { border-color: var(--accent); color: var(--accent-text); }
   font-weight: 600;
   letter-spacing: .12em;
   text-transform: uppercase;
+  color: rgba(255, 255, 255, .58); /* alternativa sin color-mix() */
   color: color-mix(in srgb, var(--brand-contrast) 55%, transparent);
   margin-bottom: 12px;
 }
 .site-footer p { font-size: .9rem; max-width: 42ch; }
 .site-footer ul { list-style: none; display: grid; gap: 8px; }
 .site-footer a {
+  color: rgba(255, 255, 255, .82); /* alternativa sin color-mix() */
   color: color-mix(in srgb, var(--brand-contrast) 80%, transparent);
   font-size: .9rem;
   text-decoration: none;
@@ -964,6 +1009,7 @@ a.tag:hover { border-color: var(--accent); color: var(--accent-text); }
   gap: 10px 20px;
   justify-content: space-between;
   font-size: .82rem;
+  color: rgba(255, 255, 255, .58); /* alternativa sin color-mix() */
   color: color-mix(in srgb, var(--brand-contrast) 55%, transparent);
 }
 
@@ -982,7 +1028,8 @@ a.tag:hover { border-color: var(--accent); color: var(--accent-text); }
   color: var(--accent);
   letter-spacing: -0.04em;
 }
-.error-page h1 {
+.error-page h1,
+.error-page h2 {
   font-size: clamp(1.4rem, 4vw, 2rem);
   text-transform: uppercase;
   margin: 14px 0 10px;
@@ -1017,4 +1064,18 @@ a.tag:hover { border-color: var(--accent); color: var(--accent-text); }
   .site-header, .site-footer, .ad-slot, .toolbar, .chips, .theme-toggle { display: none !important; }
   body { background: #fff; color: #000; }
   .detail { grid-template-columns: 1fr; }
+}
+
+/* --- Contraste en tema oscuro ------------------------------------------
+   `--accent` y `--success` se aclaran en oscuro, así que el texto blanco que
+   funciona en claro se queda muy por debajo del 4.5:1 de la AA. Sobre esos
+   fondos claros el texto pasa a ser oscuro.
+     .btn--primary  #fff sobre #4d94ff = 3.00:1  ->  #0c0e12 = 6.4:1
+     .card__free    #fff sobre #35c58c = 2.21:1  ->  #0c0e12 = 8.8:1          */
+:root[data-theme="dark"] .btn--primary,
+:root[data-theme="dark"] .card__free { color: var(--text-inverse); }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .btn--primary,
+  :root:not([data-theme="light"]) .card__free { color: var(--text-inverse); }
 }
