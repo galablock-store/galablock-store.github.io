@@ -1,85 +1,179 @@
 <!DOCTYPE html>
-<html lang="en"> 
+<html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Detalles del Producto - GalaBlock</title>
-    <link rel="stylesheet" href="index.css" />
-    <style>
-        /* Ajuste específico para la página del producto */
-        .product-detail {
-            max-width: 85%; /* Ajusta el ancho máximo para el contenedor de detalles del producto */
-            margin: 20px auto;
-            padding: 20px;
-            text-align: center;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Detalles del modelo — GalaBlock</title>
+<meta name="description" content="Ficha técnica y descarga directa de una familia de Revit (.rfa) de la biblioteca gratuita GalaBlock.">
+<meta name="author" content="GalaBlock">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0b0d11" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://galablock-store.github.io/product.html">
 
-        .product-detail img {
-            max-width: 80%; /* Asegura que la imagen no exceda el ancho del contenedor */
-            height: auto; /* Mantiene la proporción de la imagen */
-        }
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="GalaBlock">
+<meta property="og:locale" content="es_ES">
+<meta property="og:title" content="Detalles del modelo — GalaBlock">
+<meta property="og:description" content="Ficha técnica y descarga directa de una familia de Revit (.rfa) de la biblioteca gratuita GalaBlock.">
+<meta property="og:url" content="https://galablock-store.github.io/product.html">
+<meta property="og:image" content="https://galablock-store.github.io/assets/img/og-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Detalles del modelo — GalaBlock">
+<meta name="twitter:description" content="Ficha técnica y descarga directa de una familia de Revit (.rfa) de la biblioteca gratuita GalaBlock.">
+<meta name="twitter:image" content="https://galablock-store.github.io/assets/img/og-cover.jpg">
 
-        .product-detail .info-product {
-            padding: 20px;
-            font-family: 'Oswald', sans-serif;
-        }
-    </style>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="favicon.svg">
+<link rel="manifest" href="site.webmanifest">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="assets/css/styles.css">
+<!-- Aplica el tema guardado antes de pintar, para evitar el destello blanco. -->
+<script>
+(function () {
+  try {
+    var saved = localStorage.getItem('galablock-theme');
+    if (saved === 'light' || saved === 'dark') {
+      document.documentElement.setAttribute('data-theme', saved);
+      return;
+    }
+  } catch (e) {}
+  document.documentElement.removeAttribute('data-theme');
+})();
+// Con JS activo se permite la animación de entrada; sin él, el contenido
+// se muestra directamente en lugar de quedarse invisible.
+document.documentElement.classList.add('js');
+</script>
 </head>
 <body>
-    <header>
-        <h1><a href="index.html">GALABLOCK</a></h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="products.html">Productos</a></li>
-            </ul>
-        </nav>
-    </header>
-<script type="text/javascript">
-	atOptions = {
-		'key' : '94309094bdf5b0afbe1424dee0899a27',
-		'format' : 'iframe',
-		'height' : 90,
-		'width' : 728,
-		'params' : {}
-	};
-</script>
-<script type="text/javascript" src="//www.topcreativeformat.com/94309094bdf5b0afbe1424dee0899a27/invoke.js"></script>
-    <div class="product-detail">
-        <figure>
-            <img src="" alt="Product Image" />
-        </figure>
-        <div class="info-product">
-            <h2></h2>
-            <p class="description"></p>
-            <a href="" download>
-                <button>Descargar</button>
-            </a>
+<a class="skip-link" href="#main">Saltar al contenido</a>
+
+<header class="site-header">
+  <div class="wrap site-header__inner">
+    <a class="brand" href="index.html">
+      <svg class="brand__mark" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true">
+        <path d="M32 6 58 20 32 34 6 20z"/><path d="M6 20v24l26 14V34"/><path d="M58 20v24L32 58"/>
+      </svg>
+      GALABLOCK
+    </a>
+
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Abrir menú">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <path d="M4 7h16M4 12h16M4 17h16"/>
+      </svg>
+    </button>
+
+    <nav class="site-nav" id="primary-nav" aria-label="Navegación principal">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="products.html">Catálogo</a></li>
+        <li><a href="index.html#como-funciona">Cómo funciona</a></li>
+      </ul>
+    </nav>
+
+    <button class="theme-toggle" type="button" aria-label="Cambiar tema" title="Cambiar tema">
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
+      </svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M19 5l-1.5 1.5M6.5 17.5 5 19"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+    <nav aria-label="Ruta de navegación">
+      <ol class="breadcrumb">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="products.html">Catálogo</a></li>
+        <li><span aria-current="page" data-role="breadcrumb-current">Modelo</span></li>
+      </ol>
+    </nav>
+
+    <!-- Rellenado por app.js a partir de ?id=<slug> -->
+    <div class="detail" id="product-detail" hidden></div>
+
+    <div class="error-page" id="product-not-found" hidden>
+      <div>
+        <p class="error-page__code">404</p>
+        <h1>No encontramos ese modelo</h1>
+        <p>El enlace puede estar incompleto o el modelo ya no está disponible. Prueba a buscarlo en el catálogo.</p>
+        <div class="error-page__actions">
+          <a class="btn btn--primary btn--lg" href="products.html">Ver el catálogo</a>
+          <a class="btn btn--ghost btn--lg" href="index.html">Volver al inicio</a>
         </div>
+      </div>
     </div>
+  </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const params = new URLSearchParams(window.location.search);
-            const img = params.get('img');
-            const title = params.get('title');
-            const download = params.get('download');
-            const description = params.get('description');
-            
-            if (img && title && download && description) {
-                const imgElement = document.querySelector('.product-detail img');
-                const titleElement = document.querySelector('.product-detail h2');
-                const downloadLink = document.querySelector('.product-detail a');
-                const descriptionElement = document.querySelector('.product-detail .description');
+  <!-- Espacio publicitario (se mantiene el banner existente) -->
+  <div class="wrap">
+    <aside class="ad-slot" aria-label="Publicidad">
+      <script>
+        atOptions = {
+          key: '94309094bdf5b0afbe1424dee0899a27',
+          format: 'iframe',
+          height: 90,
+          width: 728,
+          params: {}
+        };
+      </script>
+      <script src="https://www.topcreativeformat.com/94309094bdf5b0afbe1424dee0899a27/invoke.js"></script>
+    </aside>
+  </div>
 
-                if (imgElement) imgElement.src = decodeURIComponent(img);
-                if (titleElement) titleElement.textContent = decodeURIComponent(title);
-                if (downloadLink) downloadLink.href = decodeURIComponent(download);
-                if (descriptionElement) descriptionElement.textContent = decodeURIComponent(description);
-            }
-        });
-    </script>
+
+  <section class="section section--tight" id="related-section">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">También te puede servir</p>
+          <h2>Otros modelos</h2>
+        </div>
+        <a class="btn btn--ghost" href="products.html">Ver todo</a>
+      </div>
+      <div class="grid" id="related-grid"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="site-footer__grid">
+      <div>
+        <h2>GalaBlock</h2>
+        <p>Biblioteca gratuita de familias de Revit para arquitectos, ingenieros y estudiantes que trabajan en BIM.</p>
+      </div>
+      <div>
+        <h3>Navegación</h3>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="products.html">Catálogo</a></li>
+          <li><a href="index.html#como-funciona">Cómo funciona</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Categorías</h3>
+        <ul>
+          <li><a href="products.html?cat=vehiculos">Vehículos</a></li>
+          <li><a href="products.html?cat=mobiliario">Mobiliario</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="site-footer__bottom">
+      <p>&copy; <span data-role="year">2024</span> GalaBlock. Todos los modelos se ofrecen tal cual, sin garantía.</p>
+      <p>Hecho para la comunidad BIM</p>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/products.js"></script>
+<script src="assets/js/app.js"></script>
 </body>
 </html>
